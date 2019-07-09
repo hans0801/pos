@@ -51,15 +51,7 @@
                         <th style="text-align:center;width:40px;">No</th>
                         <!-- <th>Kode Barang</th> -->
                         <th>Nama Barang</th>
-                        <th>Satuan</th>
-                        <th>Harga Jual</th>
-                        <!-- <th>Harga Pokok</th>
-                        <th>Harga (Eceran)</th>
-                        <th>Harga (Grosir)</th> -->
-                        <!-- <th>Stok</th>
-                        <th>Min Stok</th>
-                        <th>Kategori</th> -->
-                        <th style="width:100px;text-align:center;">Aksi</th>
+                        <th style="width:180px;text-align:center;">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -69,29 +61,13 @@
                         // $no++;
                         $id=$a['barang_id'];
                         $nm=$a['barang_nama'];
-                        $satuan=$a['satuan_nama'];
-                        $hargajual=$a['harga_jual'];
-                        // $satuan=$a['barang_satuan'];
-                        // $harpok=$a['barang_harpok'];
-                        // $harjul=$a['barang_harjul'];
-                        // $harjul_grosir=$a['barang_harjul_grosir'];
-                        // $stok=$a['barang_stok'];
-                        // $min_stok=$a['barang_min_stok'];
-                        // $kat_id=$a['barang_kategori_id'];
-                        // $kat_nama=$a['kategori_nama'];
                 ?>
                     <tr>
                         <!-- <td style="text-align:center;"><?php echo $no;?></td> -->
                         <td><?php echo $id;?></td>
                         <td><?php echo $nm;?></td>
-                        <td style="text-align:center;"><?php echo $satuan;?></td>
-                        <td style="text-align:right;"><?php echo 'Rp '.number_format($hargajual);?></td>
-                        <!-- <td style="text-align:right;"><?php echo 'Rp '.number_format($harjul);?></td>
-                        <td style="text-align:right;"><?php echo 'Rp '.number_format($harjul_grosir);?></td>
-                        <td style="text-align:center;"><?php echo $stok;?></td>
-                        <td style="text-align:center;"><?php echo $min_stok;?></td>
-                        <td><?php echo $kat_nama;?></td> -->
                         <td style="text-align:center;">
+                            <a class="btn btn-xs btn-info" href="#modalLihatPelanggan<?php echo $id?>" data-toggle="modal" title="Detail"><span class="fa fa-eye"></span> Detail</a>
                             <a class="btn btn-xs btn-warning" href="#modalEditPelanggan<?php echo $id?>" data-toggle="modal" title="Edit"><span class="fa fa-edit"></span> Edit</a>
                             <a class="btn btn-xs btn-danger" href="#modalHapusPelanggan<?php echo $id?>" data-toggle="modal" title="Hapus"><span class="fa fa-close"></span> Hapus</a>
                         </td>
@@ -102,6 +78,78 @@
             </div>
         </div>
         <!-- /.row -->
+        <!-- ============ MODAL Detail =============== -->
+        <?php
+                    foreach ($data->result_array() as $a) {
+                        $id=$a['barang_id'];
+                        $nm=$a['barang_nama'];
+                        
+                    ?>
+                <div id="modalLihatPelanggan<?php echo $id?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3 class="modal-title" id="myModalLabel">Edit Barang</h3>
+                    </div>
+                    <form class="form-horizontal" method="get" action="<?php echo base_url().'admin/barang/get_detail_barang'?>">
+                        <div class="modal-body">
+
+                        <div class="form-group">
+                            <label class="control-label col-xs-3" >Kode Barang</label>
+                            <div class="col-xs-9">
+                                <input name="kobar" class="form-control" type="text" value="<?php echo $id;?>" placeholder="Kode Barang..." style="width:335px;" readonly>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-xs-3" >Nama Barang</label>
+                            <div class="col-xs-9">
+                                <input name="nabar" class="form-control" type="text" value="<?php echo $nm;?>" placeholder="Nama Barang..." style="width:335px;" required>
+                            </div>
+                        </div>
+
+                        <?php foreach ($detail_barang->result_array() as $det_barang) {
+                            $valHargaJual=$det_barang['harga_jual'];
+                        }
+                        ?>
+
+                        <div class="form-group">
+                            <label class="control-label col-xs-3" >Harga Jual Barang</label>
+                            <div class="col-xs-9">
+                                <input name="nabar" class="form-control" type="text" value="<?php echo $valHargaJual;?>" placeholder="Harga Jual..." style="width:335px;" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3" >Kategori</label>
+                            <div class="col-xs-9">
+                                <select name="kategori" class="selectpicker show-tick form-control" data-live-search="true" title="Pilih Kategori" data-width="80%" placeholder="Pilih Kategori" required>
+                                <?php foreach ($kat2->result_array() as $k2) {
+                                    $id_kat=$k2['kategori_id'];
+                                    $nm_kat=$k2['kategori_nama'];
+                                    if($id_kat==$kat_id)
+                                        echo "<option value='$id_kat' selected>$nm_kat</option>";
+                                    else
+                                        echo "<option value='$id_kat'>$nm_kat</option>";
+                                }
+                                ?>
+                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="modal-footer">
+                            <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                            <button type="submit" class="btn btn-info">Update</button>
+                        </div>
+                    </form>
+                </div>
+                </div>
+                </div>
+            <?php
+        }
+        ?>
+
         <!-- ============ MODAL ADD =============== -->
         <div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
             <div class="modal-dialog">
@@ -244,9 +292,9 @@
                     <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h3 class="modal-title" id="myModalLabel">Edit Barang</h3>
+                        <h3 class="modal-title" id="myModalLabel">Detail Barang</h3>
                     </div>
-                    <form class="form-horizontal" method="post" action="<?php echo base_url().'admin/barang/edit_barang'?>">
+                    <form class="form-horizontal" method="post" action="<?php echo base_url().'admin/barang/get_detail_barang'?>">
                         <div class="modal-body">
 
                         <div class="form-group">
