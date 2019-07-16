@@ -21,4 +21,8 @@ class M_satuan extends CI_Model{
 		return $hsl;
 	}
 
+	function list_satuan(){
+		$hasil=$this->db->query("SELECT * FROM tbl_satuan ORDER BY satuan_nama ASC");
+		return $hasil;
+	}
 }

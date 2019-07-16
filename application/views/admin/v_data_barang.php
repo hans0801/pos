@@ -149,21 +149,49 @@
         <!-- Projects Row -->
         <div class="row">
             <div class="col-lg-12">
-            <table class="table table-bordered table-condensed" style="font-size:11px;" id="mydataSatuan">
+            <table class="table table-bordered table-condensed" style="font-size:13px;width:500px" id="mydataSatuan">
                 <thead>
                     <tr>
-                        <th style="text-align:center;width:40px;">Satuan Barang</th>
-                        <th>Harga Jual</th>
+                        <th style="text-align:center;width:200px;">Satuan Barang</th>
+                        <th style="text-align:center;width:300px;">Harga Jual</th>
                     </tr>
                 </thead>
                 <tbody id="show_data_satuan">
                 <tr>
                 <td>
-                <li><input type="text" id="TxtSat1" style="border:1px"></li>
-                <li><input type="text" id="TxtSat2" style="border:1px"></li>
+                <li>
+                        <select name="Satuan1" id="Satuan1" class="form-control">
+                            <?php foreach($data->result() as $row):?>
+                                <option value="<?php echo $row->satuan_nama;?>"><?php echo $row->satuan_nama;?></option>
+                            <?php endforeach;?>
+                        </select>
+                </li>
+                        <select name="Satuan2" id="Satuan2" class="Satuan2 form-control">
+                            <option value="0">-PILIH-</option>
+                            <?php foreach($data->result() as $row):?>
+                                <option value="<?php echo $row->satuan_nama;?>"><?php echo $row->satuan_nama;?></option>
+                            <?php endforeach;?>
+                        </select>
+                </li>
+                </li>
+                        <select name="Satuan3" id="Satuan3" class="Satuan3 form-control">
+                            <option value="0">-PILIH-</option>
+                            <?php foreach($data->result() as $row):?>
+                                <option value="<?php echo $row->satuan_nama;?>"><?php echo $row->satuan_nama;?></option>
+                            <?php endforeach;?>
+                        </select>
+                </li>
                 </td>
                 <td>
-                <input type="text" id="TxtHarga1" style="border:0px">
+                <li>
+                <input type="text" name="TxtHarga1" style="height:35px;width:290px">
+                </li>
+                <li>
+                <input type="text" name="TxtHarga2" style="height:35px;width:290px">
+                </li>
+                <li>
+                <input type="text" name="TxtHarga3" style="height:35px;width:290px">
+                </li>
                 </td>
                 </tr>
                 </tbody>
@@ -291,9 +319,15 @@
                 dataType : "json",
                 data : {id:id},
                 success: function(data){
-                    $.each(data,function(barang_id, barang_nama){
+                    $.each(data,function(barang_id, barang_nama, barang_sat1, barang_sat2, barang_sat3,barang_harga1,barang_harga2,barang_harga3){
                         $('[name="kobar_edit"]').val(data.barang_id);
                         $('[name="nabar_edit"]').val(data.barang_nama);
+                        $('[name="Satuan1"]').val(data.barang_sat1);
+                        $('[name="Satuan2"]').val(data.barang_sat2);
+                        $('[name="Satuan3"]').val(data.barang_sat3);
+                        $('[name="TxtHarga1"]').val(data.barang_harga1);
+                        $('[name="TxtHarga2"]').val(data.barang_harga2);
+                        $('[name="TxtHarga3"]').val(data.barang_harga3);
                         $('#ModalaEdit').modal('show');
                     });
                 }

@@ -3,9 +3,11 @@ class Barang_data extends CI_Controller{
     function __construct(){
         parent::__construct();
         $this->load->model('m_barang_data');
+        $this->load->model('m_satuan');
     }
     function index(){
-        $this->load->view('admin/v_data_barang');
+        $satdata['data']=$this->m_satuan->list_satuan();
+        $this->load->view('admin/v_data_barang',$satdata);
     }
 
     function data_barang(){
