@@ -9,7 +9,7 @@
     <meta name="description" content="Produk By Mfikri.com">
     <meta name="author" content="M Fikri Setiadi">
 
-    <title>Welcome To Point of Sale Apps</title>
+    <title>Selamat Datang di SIPKU(Sistem Informasi PenjualanKU)</title>
 
     <!-- Bootstrap Core CSS -->
       <link href="<?php echo base_url().'assets/css/bootstrap.min.css'?>" rel="stylesheet">
@@ -44,8 +44,8 @@
         <!-- Page Heading -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header" style="color:#fcc;">Welcome to
-                    <small>Point of Sale Apps</small>
+                <h1 class="page-header" style="color:#fcc;">Selamat Datang di
+                    <small>SIPKU(Sistem Informasi PenjualanKU)</small>
                 </h1>
             </div>
         </div>
@@ -133,7 +133,8 @@
         <?php if($h=='1'){ ?> 
             <div class="col-md-3 portfolio-item">
                 <div class="menu-item purple" style="height:150px;">
-                     <a href="<?php echo base_url().'admin/barang'?>" data-toggle="modal">
+                     <!-- <a href="<?php echo base_url().'admin/barang'?>" data-toggle="modal"> -->
+                     <a href="<?php echo base_url().'admin/barang_data'?>" data-toggle="modal">
                            <i class="fa fa-shopping-cart"></i>
                             <p style="text-align:left;font-size:14px;padding-left:5px;">Barang</p>
                       </a>
