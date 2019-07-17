@@ -37,7 +37,7 @@
             <div class="col-lg-12">
                 <h1 class="page-header">Data
                     <small>Barang</small>
-                    <div class="pull-right"><a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#largeModal"><span class="fa fa-plus"></span> Tambah Barang</a></div>
+                    <div class="pull-right"><a href="#" data-target="#ModalaAdd" class="btn btn-sm btn-success" data-toggle="modal" ><span class="fa fa-plus"></span> Tambah Barang</a></div>
                 </h1>
             </div>
         </div>
@@ -45,7 +45,7 @@
         <!-- Projects Row -->
         <div class="row">
             <div class="col-lg-12">
-            <table class="table table-bordered table-condensed" style="font-size:11px;" id="mydata">
+            <table class="table table-bordered table-condensed" style="font-size:13px;" id="mydata">
                 <thead>
                     <tr>
                         <th style="text-align:center;width:40px;">Kode Barang</th>
@@ -77,7 +77,7 @@
 
 
         <!-- MODAL ADD -->
-        <div class="modal fade" id="ModalaAdd" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+        <div class="modal fade" name="ModalaAdd" id="ModalaAdd" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
             <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
@@ -87,33 +87,83 @@
             <form class="form-horizontal">
                 <div class="modal-body">
  
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label class="control-label col-xs-3" >Kode Barang</label>
                         <div class="col-xs-9">
-                            <input name="kobar" id="kode_barang" class="form-control" type="text" placeholder="Kode Barang" style="width:335px;" required>
+                            <input name="kobar_add" id="kode_barang_add" class="form-control" type="text" placeholder="Kode Barang" style="width:335px;" required>
                         </div>
-                    </div>
+                    </div> -->
  
                     <div class="form-group">
                         <label class="control-label col-xs-3" >Nama Barang</label>
                         <div class="col-xs-9">
-                            <input name="nabar" id="nama_barang" class="form-control" type="text" placeholder="Nama Barang" style="width:335px;" required>
+                            <input name="nama_barang_add" id="nama_barang_add" class="form-control" type="text" placeholder="Nama Barang" style="width:335px;" required>
                         </div>
                     </div>
  
                     <div class="form-group">
-                        <label class="control-label col-xs-3" >Harga</label>
-                        <div class="col-xs-9">
-                            <input name="harga" id="harga" class="form-control" type="text" placeholder="Harga" style="width:335px;" required>
-                        </div>
+        <!-- Projects Row -->
+        <div class="row">
+            <div class="col-lg-12">
+            <table class="table table-bordered table-condensed" style="font-size:13px;width:500px" id="mydataSatuan">
+                <thead>
+                    <tr>
+                        <th style="text-align:center;width:200px;">Satuan Barang</th>
+                        <th style="text-align:center;width:300px;">Harga Jual</th>
+                    </tr>
+                </thead>
+                <tbody id="show_data_satuan">
+                <tr>
+                <td>
+                <li>
+                        <select name="Satuan_Add1" id="Satuan_Add1" class="form-control">
+                        <option value="0">-PILIH-</option>
+                            <?php foreach($data->result() as $row):?>
+                            <option value="<?php echo $row->satuan_nama;?>"><?php echo $row->satuan_nama;?></option>
+                            <?php endforeach;?>
+                        </select>
+                </li>
+                        <select name="Satuan_Add2" id="Satuan_Add2" class="Satuan2 form-control">
+                            <option value="0">-PILIH-</option>
+                            <?php foreach($data->result() as $row):?>
+                                <option value="<?php echo $row->satuan_nama;?>"><?php echo $row->satuan_nama;?></option>
+                            <?php endforeach;?>
+                        </select>
+                </li>
+                </li>
+                        <select name="Satuan_Add3" id="Satuan_Add3" class="Satuan3 form-control">
+                            <option value="0">-PILIH-</option>
+                            <?php foreach($data->result() as $row):?>
+                                <option value="<?php echo $row->satuan_nama;?>"><?php echo $row->satuan_nama;?></option>
+                            <?php endforeach;?>
+                        </select>
+                </li>
+                </td>
+                <td>
+                <li>
+                <input type="text" name="TxtHarga_Add1" id="TxtHarga_Add1" style="height:35px;width:290px">
+                </li>
+                <li>
+                <input type="text" name="TxtHarga_Add2" id="TxtHarga_Add2" style="height:35px;width:290px">
+                </li>
+                <li>
+                <input type="text" name="TxtHarga_Add3" id="TxtHarga_Add3" style="height:35px;width:290px">
+                </li>
+                </td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+        <!-- /.row -->
                     </div>
- 
                 </div>
- 
                 <div class="modal-footer">
                     <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
                     <button class="btn btn-info" id="btn_simpan">Simpan</button>
                 </div>
+                </div>
+
             </form>
             </div>
             </div>
@@ -134,14 +184,14 @@
                     <div class="form-group">
                         <label class="control-label col-xs-3" >Kode Barang</label>
                         <div class="col-xs-9">
-                            <input name="kobar_edit" id="kode_barang2" class="form-control" type="text" placeholder="Kode Barang" style="width:335px;" readonly>
+                            <input name="kobar_edit" id="kobar_edit" class="form-control" type="text" placeholder="Kode Barang" style="width:335px;" readonly>
                         </div>
                     </div>
  
                     <div class="form-group">
                         <label class="control-label col-xs-3" >Nama Barang</label>
                         <div class="col-xs-9">
-                            <input name="nabar_edit" id="nama_barang2" class="form-control" type="text" placeholder="Nama Barang" style="width:335px;" required>
+                            <input name="nabar_edit" id="nabar_edit" class="form-control" type="text" placeholder="Nama Barang" style="width:335px;" required>
                         </div>
                     </div>
 
@@ -160,13 +210,13 @@
                 <tr>
                 <td>
                 <li>
-                        <select name="Satuan1" id="Satuan1" class="form-control">
+                        <select name="Satuan_Edit1" id="Satuan_Edit1" class="form-control">
                             <?php foreach($data->result() as $row):?>
                                 <option value="<?php echo $row->satuan_nama;?>"><?php echo $row->satuan_nama;?></option>
                             <?php endforeach;?>
                         </select>
                 </li>
-                        <select name="Satuan2" id="Satuan2" class="Satuan2 form-control">
+                        <select name="Satuan_Edit2" id="Satuan_Edit2" class="Satuan2 form-control">
                             <option value="0">-PILIH-</option>
                             <?php foreach($data->result() as $row):?>
                                 <option value="<?php echo $row->satuan_nama;?>"><?php echo $row->satuan_nama;?></option>
@@ -174,7 +224,7 @@
                         </select>
                 </li>
                 </li>
-                        <select name="Satuan3" id="Satuan3" class="Satuan3 form-control">
+                        <select name="Satuan_Edit3" id="Satuan_Edit3" class="Satuan3 form-control">
                             <option value="0">-PILIH-</option>
                             <?php foreach($data->result() as $row):?>
                                 <option value="<?php echo $row->satuan_nama;?>"><?php echo $row->satuan_nama;?></option>
@@ -184,13 +234,13 @@
                 </td>
                 <td>
                 <li>
-                <input type="text" name="TxtHarga1" style="height:35px;width:290px">
+                <input type="text" name="Harga_Edit1" id="Harga_Edit1" style="height:35px;width:290px">
                 </li>
                 <li>
-                <input type="text" name="TxtHarga2" style="height:35px;width:290px">
+                <input type="text" name="Harga_Edit2" id="Harga_Edit2" style="height:35px;width:290px">
                 </li>
                 <li>
-                <input type="text" name="TxtHarga3" style="height:35px;width:290px">
+                <input type="text" name="Harga_Edit3" id="Harga_Edit3" style="height:35px;width:290px">
                 </li>
                 </td>
                 </tr>
@@ -250,20 +300,7 @@
     <script src="<?php echo base_url().'assets/js/jquery.price_format.min.js'?>"></script>
 
     <script type="text/javascript">
-        $(function(){
-            $('#barangharga1').priceFormat({
-                    prefix: '',
-                    //centsSeparator: '',
-                    centsLimit: 0,
-                    thousandsSeparator: ','
-            });
-            $('.harjul').priceFormat({
-                    prefix: '',
-                    //centsSeparator: '',
-                    centsLimit: 0,
-                    thousandsSeparator: ','
-            });
-        });
+
     </script>
 
     <script type="text/javascript">
@@ -271,6 +308,33 @@
         tampil_data_barang();   //pemanggilan fungsi tampil barang.
          
         $('#mydata').dataTable();
+
+        //Show Modal For Add
+        function ShowAddModal(){
+        $('#ModalaAdd').modal('show');
+        };
+
+        //Price Format
+        function PriceFormatForEdit(){
+            $('#TxtHarga1').priceFormat({
+                    prefix: '',
+                    //centsSeparator: '',
+                    centsLimit: 0,
+                    thousandsSeparator: ','
+            });
+            $('#TxtHarga2').priceFormat({
+                    prefix: '',
+                    //centsSeparator: '',
+                    centsLimit: 0,
+                    thousandsSeparator: ','
+            });
+            $('#TxtHarga3').priceFormat({
+                    prefix: '',
+                    //centsSeparator: '',
+                    centsLimit: 0,
+                    thousandsSeparator: ','
+            });
+        };
           
         //fungsi tampil barang
         function tampil_data_barang(){
@@ -292,7 +356,7 @@
                         html += '<tr>'+
                                 '<td>'+data[i].barang_id+'</td>'+
                                 '<td>'+data[i].barang_nama+'</td>'+
-                                '<td><br><i class="glyphicon glyphicon-check">'
+                                '<td><i class="glyphicon glyphicon-check">'
                                 + val_barangharga1 +'/'+val_barangsat1+
                                 '<br><i class="glyphicon glyphicon-check">'
                                 +val_barangharga2+'/'+val_barangsat2+
@@ -310,6 +374,11 @@
             });
         }
 
+        //Refresh Data From Cache
+        function RefreshCacheData(){
+            location.reload(false);
+        };
+
         //GET UPDATE
         $('#show_data').on('click','.item_edit',function(){
             var id=$(this).attr('data');
@@ -322,14 +391,16 @@
                     $.each(data,function(barang_id, barang_nama, barang_sat1, barang_sat2, barang_sat3,barang_harga1,barang_harga2,barang_harga3){
                         $('[name="kobar_edit"]').val(data.barang_id);
                         $('[name="nabar_edit"]').val(data.barang_nama);
-                        $('[name="Satuan1"]').val(data.barang_sat1);
-                        $('[name="Satuan2"]').val(data.barang_sat2);
-                        $('[name="Satuan3"]').val(data.barang_sat3);
-                        $('[name="TxtHarga1"]').val(data.barang_harga1);
-                        $('[name="TxtHarga2"]').val(data.barang_harga2);
-                        $('[name="TxtHarga3"]').val(data.barang_harga3);
+                        $('[name="Satuan_Edit1"]').val(data.barang_sat1);
+                        $('[name="Satuan_Edit2"]').val(data.barang_sat2);
+                        $('[name="Satuan_Edit3"]').val(data.barang_sat3);
+                        $('[name="Harga_Edit1"]').val(data.barang_harga1);
+                        $('[name="Harga_Edit2"]').val(data.barang_harga2);
+                        $('[name="Harga_Edit3"]').val(data.barang_harga3);
+                        PriceFormatForEdit();
                         $('#ModalaEdit').modal('show');
                     });
+                    
                 }
                 
             });
@@ -345,20 +416,36 @@
  
         //Simpan Barang
         $('#btn_simpan').on('click',function(){
-            var kobar=$('#kode_barang').val();
-            var nabar=$('#nama_barang').val();
-            var harga=$('#harga').val();
+            // var kobar=$('#kode_barang').val();
+            var nabar=$('#nama_barang_add').val();
+            var barang_sat1=$('#Satuan_Add1').val();
+            var barang_sat2=$('#Satuan_Add2').val();
+            var barang_sat3=$('#Satuan_Add3').val();
+            var barang_harga1=$('#TxtHarga_Add1').val();
+            var barang_harga2=$('#TxtHarga_Add2').val();
+            var barang_harga3=$('#TxtHarga_Add3').val();
+            var barang_cabangtoko='9999';
+            var barang_user_id=<?php session_start(); echo $_SESSION["S_Userid"];?>;
             $.ajax({
                 type : "POST",
                 url  : "<?php echo base_url().'admin/barang_data/simpan_barang';?>",
                 dataType : "json",
-                data : {kobar:kobar , nabar:nabar, harga:harga},
+                data : {nabar:nabar, barang_sat1:barang_sat1,barang_sat2:barang_sat2,barang_sat3:barang_sat3,barang_harga1:barang_harga1,barang_harga2:barang_harga2,barang_harga3:barang_harga3,barang_cabangtoko:barang_cabangtoko,barang_user_id:barang_user_id},
                 success: function(data){
-                    $('[name="kobar"]').val("");
-                    $('[name="nabar"]').val("");
-                    $('[name="harga"]').val("");
+                    $('[name="nama_barang_add"]').val("");
+                    $('[name="Satuan_Add1"]').val("");
+                    $('[name="Satuan_Add2"]').val("");
+                    $('[name="Satuan_Add3"]').val("");
+                    $('[name="TxtHarga_Add1"]').val("");
+                    $('[name="TxtHarga_Add2"]').val("");
+                    $('[name="TxtHarga_Add3"]').val("");
                     $('#ModalaAdd').modal('hide');
-                    tampil_data_barang();
+                    alert('Data Berhasil Disimpan.');
+                    RefreshCacheData();
+                },
+                error: function(data)
+                {
+                    alert('Opps...!!! Terjadi kesalahan,data tidak dapat disimpan.');
                 }
             });
             return false;
@@ -366,18 +453,35 @@
  
         //Update Barang
         $('#btn_update').on('click',function(){
-            var kobar=$('#kode_barang2').val();
-            var nabar=$('#nama_barang2').val();
+            var kobar=$('#kobar_edit').val();
+            var nabar=$('#nabar_edit').val();
+            var barang_sat1=$('#Satuan_Edit1').val();
+            var barang_sat2=$('#Satuan_Edit2').val();
+            var barang_sat3=$('#Satuan_Edit3').val();
+            var barang_harga1=$('#Harga_Edit1').val();
+            var barang_harga2=$('#Harga_Edit2').val();
+            var barang_harga3=$('#Harga_Edit3').val();
             $.ajax({
                 type : "POST",
                 url  : "<?php echo base_url().'admin/barang_data/update_barang';?>",
                 dataType : "json",
-                data : {kobar:kobar , nabar:nabar, harga:harga},
+                data : {kobar:kobar , nabar:nabar, barang_sat1:barang_sat1,barang_sat2:barang_sat2,barang_sat3:barang_sat3,barang_harga1:barang_harga1,barang_harga2:barang_harga2,barang_harga3:barang_harga3},
                 success: function(data){
                     $('[name="kobar_edit"]').val("");
                     $('[name="nabar_edit"]').val("");
+                    $('[name="Satuan_Edit1"]').val("");
+                    $('[name="Satuan_Edit2"]').val("");
+                    $('[name="Satuan_Edit3"]').val("");
+                    $('[name="Harga_Edit1"]').val("");
+                    $('[name="Harga_Edit2"]').val("");
+                    $('[name="Harga_Edit3"]').val("");
                     $('#ModalaEdit').modal('hide');
-                    tampil_data_barang();
+                    alert('Data Berhasil Diubah.');
+                    RefreshCacheData();
+                },
+                error: function(data)
+                {
+                    alert('Opps...!!! Terjadi kesalahan,data tidak dapat diubah.');
                 }
             });
             return false;
@@ -393,7 +497,7 @@
                     data : {kode: kode},
                     success: function(data){
                             $('#ModalHapus').modal('hide');
-                            tampil_data_barang();
+                            RefreshCacheData();
                     }
                 });
                 return false;

@@ -8,9 +8,9 @@ class M_barang_data extends CI_Model{
         return $hasil->result();
         }
 
-        function simpan_barang($kobar,$nabar){
-                $hasil=$this->db->query("INSERT INTO tbl_barang (barang_id,barang_nama,barang_stok,barang_min_stok,barang_tgl_input,barang_tgl_last_update,barang_user_id)
-                VALUES('$kobar','$nabar','99999999','99999999','','','1')");
+        function simpan_barang($nabar,$barang_sat1,$barang_sat2,$barang_sat3,$barang_harga1,$barang_harga2,$barang_harga3,$barang_cabangtoko,$barang_user_id){
+                $hasil=$this->db->query("INSERT INTO tbl_barang (barang_nama,barang_sat1,barang_sat2,barang_sat3,barang_harga1,barang_harga2,barang_harga3,barang_cabangtoko,barang_user_id)
+                VALUES('$nabar','$barang_sat1','$barang_sat2','$barang_sat3','$barang_harga1','$barang_harga2','$barang_harga3','$barang_cabangtoko','$barang_user_id')");
                 return $hasil;
             }
          
@@ -34,8 +34,10 @@ class M_barang_data extends CI_Model{
                 return $hasil;
             }
          
-        function update_barang($kobar,$nabar){
-                $hasil=$this->db->query("UPDATE tbl_barang SET barang_nama='$nabar' WHERE barang_id='$kobar'");
+        function update_barang($kobar,$nabar,$barang_sat1,$barang_sat2,$barang_sat3,$barang_harga1,$barang_harga2,$barang_harga3){
+                $hasil=$this->db->query("UPDATE tbl_barang SET barang_nama='$nabar',barang_sat1='$barang_sat1',barang_sat2='$barang_sat2',
+                barang_sat3='$barang_sat3',barang_harga1='$barang_harga1',barang_harga2='$barang_harga2',barang_harga3='$barang_harga3' 
+                WHERE barang_id='$kobar'");
                 return $hasil;
             }
          

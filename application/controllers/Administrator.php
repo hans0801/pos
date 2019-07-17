@@ -9,6 +9,8 @@ class Administrator extends CI_Controller{
         $this->load->view('admin/v_login',$x);
     }
     function cekuser(){
+        session_start();
+
         $username=strip_tags(stripslashes($this->input->post('username',TRUE)));
         $password=strip_tags(stripslashes($this->input->post('password',TRUE)));
         $u=$username;
@@ -24,12 +26,16 @@ class Administrator extends CI_Controller{
             $user_nama=$xcadmin['user_nama'];
             $this->session->set_userdata('idadmin',$idadmin);
             $this->session->set_userdata('nama',$user_nama);
+            $_SESSION["S_Username"]=$user_nama;
+            $_SESSION["S_Userid"]=$idadmin;
          if($xcadmin['user_level']=='2'){
              $this->session->set_userdata('akses','2');
              $idadmin=$xcadmin['user_id'];
              $user_nama=$xcadmin['user_nama'];
              $this->session->set_userdata('idadmin',$idadmin);
              $this->session->set_userdata('nama',$user_nama);
+             $_SESSION["S_Username"]=$user_nama;
+             $_SESSION["S_Userid"]=$idadmin;
          } //Front Office
            
          

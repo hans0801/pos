@@ -9,7 +9,7 @@
     <meta name="description" content="Produk By Mfikri.com">
     <meta name="author" content="M Fikri Setiadi">
 
-    <title>Selamat Datang di SIPKU(Sistem Informasi PenjualanKU)</title>
+    <title>SIPKU</title>
 
     <!-- Bootstrap Core CSS -->
       <link href="<?php echo base_url().'assets/css/bootstrap.min.css'?>" rel="stylesheet">
@@ -44,8 +44,10 @@
         <!-- Page Heading -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header" style="color:#fcc;">Selamat Datang di
-                    <small>SIPKU(Sistem Informasi PenjualanKU)</small>
+                <h1 class="page-header" style="color:#fcc;">Selamat Datang, 
+                    <small><?php 
+                    session_start();
+                    echo $_SESSION["S_Username"] ?></small>
                 </h1>
             </div>
         </div>
@@ -67,9 +69,9 @@
             </div>
             <div class="col-md-3 portfolio-item">
                 <div class="menu-item green" style="height:150px;">
-                     <a href="<?php echo base_url().'admin/penjualan_grosir'?>" data-toggle="modal">
+                     <a href="<?php echo base_url().'admin/cabang'?>" data-toggle="modal">
                            <i class="fa fa-cubes"></i>
-                            <p style="text-align:left;font-size:14px;padding-left:5px;">Penjualan Grosir</p>
+                            <p style="text-align:left;font-size:14px;padding-left:5px;">Cabang Toko</p>
                       </a>
                 </div> 
             </div>
