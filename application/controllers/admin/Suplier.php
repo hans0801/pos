@@ -13,7 +13,8 @@ class Suplier extends CI_Controller{
 		$data['data']=$this->m_suplier->tampil_suplier();
 		$this->load->view('admin/v_suplier',$data);
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 	function tambah_suplier(){
@@ -24,7 +25,8 @@ class Suplier extends CI_Controller{
 		$this->m_suplier->simpan_suplier($nama,$alamat,$notelp);
 		redirect('admin/suplier');
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 	function edit_suplier(){
@@ -36,7 +38,8 @@ class Suplier extends CI_Controller{
 		$this->m_suplier->update_suplier($kode,$nama,$alamat,$notelp);
 		redirect('admin/suplier');
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 	function hapus_suplier(){
@@ -45,7 +48,8 @@ class Suplier extends CI_Controller{
 		$this->m_suplier->hapus_suplier($kode);
 		redirect('admin/suplier');
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 }

@@ -21,7 +21,8 @@ class Laporan extends CI_Controller{
 		$data['jual_thn']=$this->m_laporan->get_tahun_jual();
 		$this->load->view('admin/v_laporan',$data);
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 	function lap_stok_barang(){

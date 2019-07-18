@@ -13,35 +13,39 @@ class Cabang extends CI_Controller{
 		$data['data']=$this->m_cabang->tampil_cabang();
 		$this->load->view('admin/v_cabang',$data);
 	}else{
-        echo "Halaman tidak ditemukan";
+        $url=base_url('administrator');
+        redirect($url);
     }
 	}
-	function tambah_kategori(){
+	function tambah_cabang(){
 	if($this->session->userdata('akses')=='1'){
-		$kat=$this->input->post('kategori');
-		$this->m_kategori->simpan_kategori($kat);
-		redirect('admin/kategori');
+		$kat=$this->input->post('cabang');
+		$this->m_cabang->simpan_cabang($kat);
+		redirect('admin/cabang');
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+        redirect($url);
     }
 	}
-	function edit_kategori(){
-	if($this->session->userdata('akses')=='1'){
-		$kode=$this->input->post('kode');
-		$kat=$this->input->post('kategori');
-		$this->m_kategori->update_kategori($kode,$kat);
-		redirect('admin/kategori');
-	}else{
-        echo "Halaman tidak ditemukan";
-    }
-	}
-	function hapus_kategori(){
+	function edit_cabang(){
 	if($this->session->userdata('akses')=='1'){
 		$kode=$this->input->post('kode');
-		$this->m_kategori->hapus_kategori($kode);
-		redirect('admin/kategori');
+		$kat=$this->input->post('kategori');
+		$this->m_cabang->update_cabang($kode,$kat);
+		redirect('admin/cabang');
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+        redirect($url);
+    }
+	}
+	function hapus_cabang(){
+	if($this->session->userdata('akses')=='1'){
+		$kode=$this->input->post('kode');
+		$this->m_cabang->hapus_cabang($kode);
+		redirect('admin/cabang');
+	}else{
+		$url=base_url('administrator');
+        redirect($url);
     }
 	}
 }

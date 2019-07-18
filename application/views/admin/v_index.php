@@ -6,8 +6,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Produk By Mfikri.com">
-    <meta name="author" content="M Fikri Setiadi">
+    <meta name="description" content="Product By Windy's Tech">
+    <meta name="author" content="Windy's Tech">
 
     <title>SIPKU</title>
 
@@ -32,7 +32,7 @@
 </head>
 
 <body>
-<img src="<?php echo base_url().'assets/img/bg2.jpg'?>" alt="gambar" class="bg" />
+<!-- <img src="<?php echo base_url().'assets/img/bg2.jpg'?>" alt="gambar" class="bg" /> -->
     <!-- Navigation -->
    <?php 
         $this->load->view('admin/menu');
@@ -44,8 +44,8 @@
         <!-- Page Heading -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header" style="color:#fcc;">Selamat Datang, 
-                    <small><?php 
+                <h1 class="page-header" style="color:#b8b8b8;">Selamat Datang, 
+                    <small style="color:#b8b8b8;"><?php 
                     session_start();
                     echo $_SESSION["S_Username"] ?></small>
                 </h1>

@@ -6,8 +6,13 @@ class Barang_data extends CI_Controller{
         $this->load->model('m_satuan');
     }
     function index(){
-        $satdata['data']=$this->m_satuan->list_satuan();
-        $this->load->view('admin/v_data_barang',$satdata);
+        if($this->session->userdata('akses')=='1'){
+            $satdata['data']=$this->m_satuan->list_satuan();
+            $this->load->view('admin/v_data_barang',$satdata);
+        }else{
+            $url=base_url('administrator');
+            redirect($url);
+        }
     }
 
     function data_barang(){

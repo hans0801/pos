@@ -16,7 +16,8 @@ class Pembelian extends CI_Controller{
 		$x['sup']=$this->m_suplier->tampil_suplier();
 		$this->load->view('admin/v_pembelian',$x);
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 	function get_barang(){
@@ -25,7 +26,8 @@ class Pembelian extends CI_Controller{
 		$x['brg']=$this->m_barang->get_barang($kobar);
 		$this->load->view('admin/v_detail_barang_beli',$x);
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 	function add_to_cart(){
@@ -51,7 +53,8 @@ class Pembelian extends CI_Controller{
 		$this->cart->insert($data); 
 		redirect('admin/pembelian');
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 	function remove(){
@@ -63,7 +66,8 @@ class Pembelian extends CI_Controller{
             ));
 		redirect('admin/pembelian');
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 	function simpan_pembelian(){
@@ -89,7 +93,8 @@ class Pembelian extends CI_Controller{
 			redirect('admin/pembelian');
 		}
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }	
 	}
 }

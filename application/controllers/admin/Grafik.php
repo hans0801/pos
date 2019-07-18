@@ -22,7 +22,8 @@ class Grafik extends CI_Controller{
 		$data['jual_thn']=$this->m_laporan->get_tahun_jual();
 		$this->load->view('admin/v_grafik',$data);
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 	function graf_stok_barang(){

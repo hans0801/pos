@@ -13,7 +13,8 @@ class Satuan extends CI_Controller{
 		$data['data']=$this->m_satuan->tampil_satuan();
 		$this->load->view('admin/v_satuan',$data);
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 	function tambah_satuan(){
@@ -22,7 +23,8 @@ class Satuan extends CI_Controller{
 		$this->m_satuan->simpan_satuan($sat);
 		redirect('admin/satuan');
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 	function edit_satuan(){
@@ -32,7 +34,8 @@ class Satuan extends CI_Controller{
 		$this->m_satuan->update_satuan($kode,$sat);
 		redirect('admin/satuan');
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 	function hapus_satuan(){
@@ -41,7 +44,8 @@ class Satuan extends CI_Controller{
 		$this->m_satuan->hapus_satuan($kode);
 		redirect('admin/satuan');
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 }

@@ -13,7 +13,8 @@ class Kategori extends CI_Controller{
 		$data['data']=$this->m_kategori->tampil_kategori();
 		$this->load->view('admin/v_kategori',$data);
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 	function tambah_kategori(){
@@ -22,7 +23,8 @@ class Kategori extends CI_Controller{
 		$this->m_kategori->simpan_kategori($kat);
 		redirect('admin/kategori');
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 	function edit_kategori(){
@@ -32,7 +34,8 @@ class Kategori extends CI_Controller{
 		$this->m_kategori->update_kategori($kode,$kat);
 		redirect('admin/kategori');
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 	function hapus_kategori(){
@@ -41,7 +44,8 @@ class Kategori extends CI_Controller{
 		$this->m_kategori->hapus_kategori($kode);
 		redirect('admin/kategori');
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 }

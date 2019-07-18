@@ -6,8 +6,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Produk By Mfikri.com">
-    <meta name="author" content="M Fikri Setiadi">
+    <meta name="description" content="Product By Windy's Tech">
+    <meta name="author" content="Windy's Tech">
 
     <title>Transaksi Penjualan</title>
 
@@ -132,9 +132,9 @@
                             <th style="text-align:center;width:40px;">No</th>
                             <th style="width:120px;">Kode Barang</th>
                             <th style="width:240px;">Nama Barang</th>
-                            <th>Satuan</th>
+                            <!-- <th>Satuan</th>
                             <th style="width:100px;">Harga (Eceran)</th>
-                            <th>Stok</th>
+                            <th>Stok</th> -->
                             <th style="width:100px;text-align:center;">Aksi</th>
                         </tr>
                     </thead>
@@ -145,20 +145,20 @@
                             $no++;
                             $id=$a['barang_id'];
                             $nm=$a['barang_nama'];
-                            $satuan=$a['barang_satuan'];
-                            $harpok=$a['barang_harpok'];
-                            $harjul=$a['barang_harjul'];
-                            $harjul_grosir=$a['barang_harjul_grosir'];
-                            $stok=$a['barang_stok'];
-                            $min_stok=$a['barang_min_stok'];
-                            $kat_id=$a['barang_kategori_id'];
-                            $kat_nama=$a['kategori_nama'];
+                            // $satuan=$a['barang_satuan'];
+                            // $harpok=$a['barang_harpok'];
+                            // $harjul=$a['barang_harjul'];
+                            // $harjul_grosir=$a['barang_harjul_grosir'];
+                            // $stok=$a['barang_stok'];
+                            // $min_stok=$a['barang_min_stok'];
+                            // $kat_id=$a['barang_kategori_id'];
+                            // $kat_nama=$a['kategori_nama'];
                     ?>
                         <tr>
                             <td style="text-align:center;"><?php echo $no;?></td>
                             <td><?php echo $id;?></td>
                             <td><?php echo $nm;?></td>
-                            <td style="text-align:center;"><?php echo $satuan;?></td>
+                            <!-- <td style="text-align:center;"><?php echo $satuan;?></td>
                             <td style="text-align:right;"><?php echo 'Rp '.number_format($harjul);?></td>
                             <td style="text-align:center;"><?php echo $stok;?></td>
                             <td style="text-align:center;">
@@ -168,7 +168,7 @@
                             <input type="hidden" name="satuan" value="<?php echo $satuan;?>">
                             <input type="hidden" name="stok" value="<?php echo $stok;?>">
                             <input type="hidden" name="harjul" value="<?php echo number_format($harjul);?>">
-                            <input type="hidden" name="diskon" value="0">
+                            <input type="hidden" name="diskon" value="0"> -->
                             <input type="hidden" name="qty" value="1" required>
                                 <button type="submit" class="btn btn-xs btn-info" title="Pilih"><span class="fa fa-edit"></span> Pilih</button>
                             </form>
@@ -201,7 +201,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p style="text-align:center;">Copyright &copy; <?php echo '2017';?> by M Fikri Setiadi</p>
+                    <p style="text-align:center;">Copyright &copy; <?php echo '2019';?> by Windy's Tech</p>
                 </div>
             </div>
             <!-- /.row -->

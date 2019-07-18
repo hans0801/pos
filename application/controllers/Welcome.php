@@ -9,6 +9,12 @@ class Welcome extends CI_Controller{
 	}
 	
 	function index(){
-		$this->load->view('admin/v_index');
+		if($this->session->userdata('akses')=='1'){
+			$this->load->view('admin/v_index');
+		}else{
+			$url=base_url('administrator');
+			redirect($url);
+		}
+
 	}
 }

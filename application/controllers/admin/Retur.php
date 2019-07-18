@@ -17,7 +17,8 @@ class Retur extends CI_Controller{
 		$data['retur']=$this->m_penjualan->tampil_retur();
 		$this->load->view('admin/v_retur',$data);
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 	function get_barang(){
@@ -26,7 +27,8 @@ class Retur extends CI_Controller{
 		$x['brg']=$this->m_barang->get_barang($kobar);
 		$this->load->view('admin/v_detail_barang_retur',$x);
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 
@@ -41,7 +43,8 @@ class Retur extends CI_Controller{
 		$this->m_penjualan->simpan_retur($kobar,$nabar,$satuan,$harjul,$qty,$keterangan);
 		redirect('admin/retur');
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 
@@ -51,7 +54,8 @@ class Retur extends CI_Controller{
 		$this->m_penjualan->hapus_retur($kode);
 		redirect('admin/retur');
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 

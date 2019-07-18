@@ -6,8 +6,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Produk By Mfikri.com">
-    <meta name="author" content="M Fikri Setiadi">
+    <meta name="description" content="Product By Windy's Tech">
+    <meta name="author" content="Windy's Tech">
 
     <title>Welcome To Point of Sale Apps</title>
 
@@ -50,7 +50,6 @@
                     <tr>
                         <th style="text-align:center;width:40px;">No</th>
                         <th>Nama Cabang</th>
-                        <th>Cabang Pusat</th>
                         <th style="width:140px;text-align:center;">Aksi</th>
                     </tr>
                 </thead>
@@ -61,15 +60,13 @@
                         $no++;
                         $id=$a['cabang_id'];
                         $cn=$a['cabang_nama'];
-                        $cp=$a['cabang_pusat'];
                 ?>
                     <tr>
                         <td style="text-align:center;"><?php echo $no;?></td>
                         <td><?php echo $cn;?></td>
-                        <td><?php echo $cp;?></td>
                         <td style="text-align:center;">
                             <a class="btn btn-xs btn-warning" href="#modalEditPelanggan<?php echo $id?>" data-toggle="modal" title="Edit"><span class="fa fa-edit"></span> Edit</a>
-                            <a class="btn btn-xs btn-danger" href="#modalHapusPelanggan<?php echo $id?>" data-toggle="modal" title="Hapus"><span class="fa fa-close"></span> Hapus</a>
+                            <!-- <a class="btn btn-xs btn-danger" href="#modalHapusPelanggan<?php echo $id?>" data-toggle="modal" title="Hapus"><span class="fa fa-close"></span> Hapus</a> -->
                         </td>
                     </tr>
                 <?php endforeach;?>
@@ -90,18 +87,16 @@
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <label class="control-label col-xs-3" >Nama Kategori</label>
+                        <label class="control-label col-xs-3" >Nama Cabang Toko</label>
                         <div class="col-xs-9">
-                            <input name="kategori" class="form-control" type="text" placeholder="Input Nama Kategori..." style="width:280px;" required>
+                            <input name="satuan" class="form-control" type="text" placeholder="Input Nama Cabang..." style="width:280px;" required>
                         </div>
                     </div>
                            
-
-                </div>
-
-                <div class="modal-footer">
+                    <div class="modal-footer">
                     <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
                     <button class="btn btn-info">Simpan</button>
+                </div>
                 </div>
             </form>
             </div>
@@ -111,32 +106,31 @@
         <!-- ============ MODAL EDIT =============== -->
         <?php
                     foreach ($data->result_array() as $a) {
-                        $id=$a['kategori_id'];
-                        $nm=$a['kategori_nama'];
+                        $id=$a['cabang_id'];
+                        $cn=$a['cabang_nama'];
                     ?>
                 <div id="modalEditPelanggan<?php echo $id?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
                     <div class="modal-dialog">
                     <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h3 class="modal-title" id="myModalLabel">Edit Kategori</h3>
+                        <h3 class="modal-title" id="myModalLabel">Edit Cabang Toko</h3>
                     </div>
-                    <form class="form-horizontal" method="post" action="<?php echo base_url().'admin/kategori/edit_kategori'?>">
+                    <form class="form-horizontal" method="post" action="<?php echo base_url().'admin/satuan/edit_cabang'?>">
                         <div class="modal-body">
                             <input name="kode" type="hidden" value="<?php echo $id;?>">
 
                     <div class="form-group">
-                        <label class="control-label col-xs-3" >Kategori</label>
+                        <label class="control-label col-xs-3" >Nama Cabang Toko</label>
                         <div class="col-xs-9">
-                            <input name="kategori" class="form-control" type="text" value="<?php echo $nm;?>" style="width:280px;" required>
+                            <input name="satuan" class="form-control" type="text" style="width:280px;" value="<?php echo $cn;?>">
                         </div>
                     </div>
-
-                </div>
-                        <div class="modal-footer">
+                    <div class="modal-footer">
                             <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
                             <button type="submit" class="btn btn-info">Update</button>
                         </div>
+                </div>
                     </form>
                 </div>
                 </div>
@@ -148,17 +142,17 @@
         <!-- ============ MODAL HAPUS =============== -->
         <?php
                     foreach ($data->result_array() as $a) {
-                        $id=$a['kategori_id'];
-                        $nm=$a['kategori_nama'];
+                        $id=$a['cabang_id'];
+                        $cn=$a['cabang_nama'];
                     ?>
                 <div id="modalHapusPelanggan<?php echo $id?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
                     <div class="modal-dialog">
                     <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h3 class="modal-title" id="myModalLabel">Hapus Kategori</h3>
+                        <h3 class="modal-title" id="myModalLabel">Hapus Satuan</h3>
                     </div>
-                    <form class="form-horizontal" method="post" action="<?php echo base_url().'admin/kategori/hapus_kategori'?>">
+                    <form class="form-horizontal" method="post" action="<?php echo base_url().'admin/satuan/hapus_satuan'?>">
                         <div class="modal-body">
                             <p>Yakin mau menghapus data..?</p>
                                     <input name="kode" type="hidden" value="<?php echo $id; ?>">
@@ -183,7 +177,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p style="text-align:center;">Copyright &copy; <?php echo '2017';?> by M Fikri Setiadi</p>
+                    <p style="text-align:center;">Copyright &copy; <?php echo '2019';?> by Windy's Tech</p>
                 </div>
             </div>
             <!-- /.row -->

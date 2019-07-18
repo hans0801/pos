@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 17, 2019 at 12:28 PM
+-- Generation Time: Jul 18, 2019 at 01:53 PM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.6
 
@@ -21,16 +21,11 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_penjualan`
 --
-CREATE DATABASE IF NOT EXISTS `db_penjualan` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `db_penjualan`;
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `tbl_barang`
---
--- Creation: Jul 17, 2019 at 03:18 AM
--- Last update: Jul 17, 2019 at 09:22 AM
 --
 
 CREATE TABLE `tbl_barang` (
@@ -971,9 +966,6 @@ INSERT INTO `tbl_barang` (`barang_id`, `barang_nama`, `barang_stok`, `barang_min
 
 --
 -- Table structure for table `tbl_barang_detail`
---
--- Creation: Jul 16, 2019 at 05:21 AM
--- Last update: Jul 16, 2019 at 05:21 AM
 --
 
 CREATE TABLE `tbl_barang_detail` (
@@ -1995,9 +1987,6 @@ INSERT INTO `tbl_barang_detail` (`barang_detail_id`, `barang_id`, `harga_jual`, 
 --
 -- Table structure for table `tbl_barang_ori`
 --
--- Creation: Jul 16, 2019 at 05:21 AM
--- Last update: Jul 16, 2019 at 05:21 AM
---
 
 CREATE TABLE `tbl_barang_ori` (
   `barang_id` varchar(15) NOT NULL,
@@ -2246,9 +2235,6 @@ INSERT INTO `tbl_barang_ori` (`barang_id`, `barang_nama`, `barang_satuan`, `bara
 
 --
 -- Table structure for table `tbl_barang_ori1`
---
--- Creation: Jul 16, 2019 at 05:21 AM
--- Last update: Jul 16, 2019 at 05:21 AM
 --
 
 CREATE TABLE `tbl_barang_ori1` (
@@ -3181,8 +3167,6 @@ INSERT INTO `tbl_barang_ori1` (`barang_id`, `barang_nama`, `barang_stok`, `baran
 --
 -- Table structure for table `tbl_beli`
 --
--- Creation: Jul 16, 2019 at 05:21 AM
---
 
 CREATE TABLE `tbl_beli` (
   `beli_nofak` varchar(15) DEFAULT NULL,
@@ -3197,31 +3181,25 @@ CREATE TABLE `tbl_beli` (
 --
 -- Table structure for table `tbl_cabangtoko`
 --
--- Creation: Jul 17, 2019 at 09:30 AM
--- Last update: Jul 17, 2019 at 09:32 AM
---
 
 CREATE TABLE `tbl_cabangtoko` (
   `cabang_id` int(11) NOT NULL,
-  `cabang_nama` varchar(40) NOT NULL,
-  `cabang_pusat` int(11) NOT NULL
+  `cabang_nama` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_cabangtoko`
 --
 
-INSERT INTO `tbl_cabangtoko` (`cabang_id`, `cabang_nama`, `cabang_pusat`) VALUES
-(1, 'Gun Toko Pusat', 0),
-(2, 'Gun Toko Ciledug', 1),
-(3, 'Gun Toko Pondok Kacang', 1);
+INSERT INTO `tbl_cabangtoko` (`cabang_id`, `cabang_nama`) VALUES
+(1, 'Gun Toko Pusat'),
+(2, 'Gun Toko Ciledug'),
+(3, 'Gun Toko Pondok Kacang');
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `tbl_detail_beli`
---
--- Creation: Jul 16, 2019 at 05:21 AM
 --
 
 CREATE TABLE `tbl_detail_beli` (
@@ -3238,9 +3216,6 @@ CREATE TABLE `tbl_detail_beli` (
 
 --
 -- Table structure for table `tbl_detail_jual`
---
--- Creation: Jul 16, 2019 at 05:21 AM
--- Last update: Jul 16, 2019 at 05:21 AM
 --
 
 CREATE TABLE `tbl_detail_jual` (
@@ -3293,9 +3268,6 @@ INSERT INTO `tbl_detail_jual` (`d_jual_id`, `d_jual_nofak`, `d_jual_barang_id`, 
 --
 -- Table structure for table `tbl_jual`
 --
--- Creation: Jul 16, 2019 at 05:21 AM
--- Last update: Jul 16, 2019 at 05:21 AM
---
 
 CREATE TABLE `tbl_jual` (
   `jual_nofak` varchar(15) NOT NULL,
@@ -3338,9 +3310,6 @@ INSERT INTO `tbl_jual` (`jual_nofak`, `jual_tanggal`, `jual_total`, `jual_jml_ua
 
 --
 -- Table structure for table `tbl_kategori`
---
--- Creation: Jul 16, 2019 at 05:21 AM
--- Last update: Jul 16, 2019 at 05:21 AM
 --
 
 CREATE TABLE `tbl_kategori` (
@@ -3394,8 +3363,6 @@ INSERT INTO `tbl_kategori` (`kategori_id`, `kategori_nama`) VALUES
 --
 -- Table structure for table `tbl_retur`
 --
--- Creation: Jul 16, 2019 at 05:21 AM
---
 
 CREATE TABLE `tbl_retur` (
   `retur_id` int(11) NOT NULL,
@@ -3413,9 +3380,6 @@ CREATE TABLE `tbl_retur` (
 
 --
 -- Table structure for table `tbl_satuan`
---
--- Creation: Jul 16, 2019 at 05:21 AM
--- Last update: Jul 16, 2019 at 05:21 AM
 --
 
 CREATE TABLE `tbl_satuan` (
@@ -3494,8 +3458,6 @@ INSERT INTO `tbl_satuan` (`satuan_id`, `satuan_nama`) VALUES
 --
 -- Table structure for table `tbl_suplier`
 --
--- Creation: Jul 16, 2019 at 05:21 AM
---
 
 CREATE TABLE `tbl_suplier` (
   `suplier_id` int(11) NOT NULL,
@@ -3508,9 +3470,6 @@ CREATE TABLE `tbl_suplier` (
 
 --
 -- Table structure for table `tbl_user`
---
--- Creation: Jul 16, 2019 at 05:21 AM
--- Last update: Jul 16, 2019 at 05:21 AM
 --
 
 CREATE TABLE `tbl_user` (
@@ -3527,7 +3486,7 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`user_id`, `user_nama`, `user_username`, `user_password`, `user_level`, `user_status`) VALUES
-(1, 'M Fikri Setiadi', 'admin', '21232f297a57a5a743894a0e4a801fc3', '1', '1'),
+(1, 'Windys', 'admin', '21232f297a57a5a743894a0e4a801fc3', '1', '1'),
 (2, 'fikri', 'kasir', 'e10adc3949ba59abbe56e057f20f883e', '2', '1');
 
 --

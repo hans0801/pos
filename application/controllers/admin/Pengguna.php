@@ -13,7 +13,8 @@ class Pengguna extends CI_Controller{
 		$data['data']=$this->m_pengguna->get_pengguna();
 		$this->load->view('admin/v_pengguna',$data);
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 
@@ -34,7 +35,8 @@ class Pengguna extends CI_Controller{
 		}
 		
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 	function edit_pengguna(){
@@ -58,7 +60,8 @@ class Pengguna extends CI_Controller{
 			redirect('admin/pengguna');
 		}
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 	function nonaktifkan(){
@@ -67,7 +70,8 @@ class Pengguna extends CI_Controller{
 		$this->m_pengguna->update_status($kode);
 		redirect('admin/pengguna');
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 }

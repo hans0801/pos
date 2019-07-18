@@ -7,25 +7,27 @@ class Penjualan extends CI_Controller{
             redirect($url);
         };
 		$this->load->model('m_kategori');
-		$this->load->model('m_barang');
+		$this->load->model('m_barang_data');
 		$this->load->model('m_suplier');
 		$this->load->model('m_penjualan');
 	}
 	function index(){
 	if($this->session->userdata('akses')=='1' || $this->session->userdata('akses')=='2'){
-		$data['data']=$this->m_barang->tampil_barang();
+		$data['data']=$this->m_barang_data->barang_list();
 		$this->load->view('admin/v_penjualan',$data);
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 	function get_barang(){
 	if($this->session->userdata('akses')=='1' || $this->session->userdata('akses')=='2'){
 		$kobar=$this->input->post('kode_brg');
-		$x['brg']=$this->m_barang->get_barang($kobar);
+		$x['brg']=$this->m_barang_data->get_barang($kobar);
 		$this->load->view('admin/v_detail_barang_jual',$x);
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 	function add_to_cart(){
@@ -66,7 +68,8 @@ class Penjualan extends CI_Controller{
 
 		redirect('admin/penjualan');
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 	function remove(){
@@ -78,7 +81,8 @@ class Penjualan extends CI_Controller{
             ));
 		redirect('admin/penjualan');
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 	function simpan_penjualan(){
@@ -111,7 +115,8 @@ class Penjualan extends CI_Controller{
 		}
 
 	}else{
-        echo "Halaman tidak ditemukan";
+		$url=base_url('administrator');
+		redirect($url);
     }
 	}
 
