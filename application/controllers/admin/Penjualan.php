@@ -6,14 +6,14 @@ class Penjualan extends CI_Controller{
             $url=base_url();
             redirect($url);
         };
-		$this->load->model('m_kategori');
+		$this->load->model('m_satuan');
 		$this->load->model('m_barang_data');
 		$this->load->model('m_suplier');
 		$this->load->model('m_penjualan');
 	}
 	function index(){
 	if($this->session->userdata('akses')=='1' || $this->session->userdata('akses')=='2'){
-		$data['data']=$this->m_barang_data->barang_list();
+		$data['data']=$this->m_barang_data->tampil_barang_no_format();
 		$this->load->view('admin/v_penjualan',$data);
 	}else{
 		$url=base_url('administrator');
@@ -33,16 +33,16 @@ class Penjualan extends CI_Controller{
 	function add_to_cart(){
 	if($this->session->userdata('akses')=='1' || $this->session->userdata('akses')=='2'){
 		$kobar=$this->input->post('kode_brg');
-		$produk=$this->m_barang->get_barang($kobar);
+		$produk=$this->m_barang_data->get_barang($kobar);
 		$i=$produk->row_array();
 		$data = array(
                'id'       => $i['barang_id'],
                'name'     => $i['barang_nama'],
-               'satuan'   => $i['barang_satuan'],
-               'harpok'   => $i['barang_harpok'],
-               'price'    => str_replace(",", "", $this->input->post('harjul'))-$this->input->post('diskon'),
-               'disc'     => $this->input->post('diskon'),
-               'qty'      => $this->input->post('qty'),
+            //    'satuan'   => $i['barang_satuan'],
+            //    'harpok'   => $i['barang_harpok'],
+            //    'price'    => str_replace(",", "", $this->input->post('harjul'))-$this->input->post('diskon'),
+            //    'disc'     => $this->input->post('diskon'),
+            //    'qty'      => $this->input->post('qty'),
                'amount'	  => str_replace(",", "", $this->input->post('harjul'))
             );
 	if(!empty($this->cart->total_items())){

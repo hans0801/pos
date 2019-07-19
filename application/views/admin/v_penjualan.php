@@ -59,9 +59,78 @@
                     </div>
             </table>
              </form>
-            <table class="table table-bordered table-condensed" style="font-size:11px;margin-top:10px;">
+             <script type="text/javascript">    
+            
+            function addRow(tableID) {
+
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+
+            var cell1 = row.insertCell(0);
+            var element1 = document.createElement("input");
+            element1.type = "checkbox";
+            element1.name="chkbox[]";
+            cell1.appendChild(element1);
+
+            var cell2 = row.insertCell(1);
+            var element3 = document.createElement("input");
+            element3.type = "text";
+            element3.name = "txtbox[]";
+            cell2.appendChild(element3);
+
+
+            var cell3 = row.insertCell(2);
+            var element2 = document.createElement("input");
+            element2.type = "text";
+            element2.name = "txtbox[]";
+            cell3.appendChild(element2);
+
+            }
+
+
+
+            function deleteRow(tableID) {
+             try {
+             var table = document.getElementById(tableID);
+             var rowCount = table.rows.length;
+
+             for(var i=0; i<rowCount; i++) {
+             var row = table.rows[i];
+             var chkbox = row.cells[0].childNodes[0];
+             if(null != chkbox && true == chkbox.checked) {
+             table.deleteRow(i);
+             rowCount--;
+             i--;
+             }
+
+
+             }
+              }catch(e) {
+              alert(e);
+             }
+            }
+
+            </script>
+
+            <input onclick="addRow('dataTable')" type="button" value="Tambah" />
+
+            <input onclick="deleteRow('dataTable')" type="button" value="Hapus" />
+
+            <div style="padding: 20px 0px 0px 0px;">
+            <table id="dataTable" style="border-bottom: 1px solid #F00; border-left: 1px solid #F00; border-right: 1px solid #F00; border-top: 1px solid #F00; width: 350pxpx;">
+            <tr>
+            <td><input name="chk" type="checkbox" /></td>
+           <td> <input type="text" /> </td>
+        <td> <input type="text" /> </td>
+            </tr>
+        </table>
+</div>
+
+            <!-- <table class="table table-bordered table-condensed" style="font-size:11px;margin-top:10px;" id="TabOrder">
                 <thead>
                     <tr>
+                        <th>No</th>
                         <th>Kode Barang</th>
                         <th>Nama Barang</th>
                         <th style="text-align:center;">Satuan</th>
@@ -73,7 +142,35 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $i = 1; ?>
+                    <tr>
+                     <td>
+                     <input type="text" name="TxtNo" class="form-control" />
+                     </td>
+                     <td>
+                     <input type="text" name="TxtBarangId" class="form-control" />
+                     </td>
+                     <td>
+                     <input type="text" name="TxtBarangNama" class="form-control" />
+                     </td>
+                     <td>
+                     <input type="text" name="TxtSatuan" class="form-control" />
+                     </td>
+                     <td>
+                     <input type="text" name="TxtHarga" class="form-control" />
+                     </td>
+                     <td>
+                     <input type="text" name="TxtDiskon" class="form-control" />
+                     </td>
+                     <td>
+                     <input type="text" name="TxtQty" class="form-control" />
+                     </td>
+                     <td>
+                     <input type="text" name="TxtSubTotal" class="form-control" />
+                     </td>
+                     <button class="btn" data-dismiss="modal" aria-hidden="true">Hapus</button>
+                    </tr>
+
+                    <!-- <?php $i = 1; ?>
                     <?php foreach ($this->cart->contents() as $items): ?>
                     <?php echo form_hidden($i.'[rowid]', $items['rowid']); ?>
                     <tr>
@@ -89,9 +186,9 @@
                     </tr>
                     
                     <?php $i++; ?>
-                    <?php endforeach; ?>
+                    <?php endforeach; ?> -->
                 </tbody>
-            </table>
+            </table> -->
             <form action="<?php echo base_url().'admin/penjualan/simpan_penjualan'?>" method="post">
             <table>
                 <tr>
@@ -130,8 +227,10 @@
                     <thead>
                         <tr>
                             <th style="text-align:center;width:40px;">No</th>
-                            <th style="width:120px;">Kode Barang</th>
+                            <!-- <th style="width:120px;">Kode Barang</th> -->
                             <th style="width:240px;">Nama Barang</th>
+                            <th style="width:120px;">Harga Jual Barang / Satuan </th>
+                            <th style="width:60px;">Qty </th>
                             <!-- <th>Satuan</th>
                             <th style="width:100px;">Harga (Eceran)</th>
                             <th>Stok</th> -->
@@ -143,8 +242,14 @@
                         $no=0;
                         foreach ($data->result_array() as $a):
                             $no++;
-                            $id=$a['barang_id'];
+                            // $id=$a['barang_id'];
                             $nm=$a['barang_nama'];
+                            $sat1=$a['barang_sat1'];
+                            $sat2=$a['barang_sat2'];
+                            $sat3=$a['barang_sat3'];
+                            $har1=$a['barang_harga1'];
+                            $har2=$a['barang_harga2'];
+                            $har3=$a['barang_harga3'];
                             // $satuan=$a['barang_satuan'];
                             // $harpok=$a['barang_harpok'];
                             // $harjul=$a['barang_harjul'];
@@ -156,20 +261,30 @@
                     ?>
                         <tr>
                             <td style="text-align:center;"><?php echo $no;?></td>
-                            <td><?php echo $id;?></td>
+                            <!-- <td><?php echo $id;?></td> -->
                             <td><?php echo $nm;?></td>
+                            <td>
+                            <select name="HarSat" id="HarSat" class="form-control">
+                                <option value="0">-PILIH-</option>
+                                <option value="<?php echo number_format($har1);?>"><?php echo 'Rp' .number_format($har1); echo '/'; echo $sat1;?></option>
+                                <option value="<?php echo number_format($har2);?>"><?php echo 'Rp' .number_format($har2); echo '/'; echo $sat2;?></option>
+                                <option value="<?php echo number_format($har3);?>"><?php echo 'Rp' .number_format($har3); echo '/'; echo $sat3;?></option>
+                            </select>
+                            </td>
+                            <td><input name="TxtQty" id="TxtQty" class="form-control" type="text" style="width:60px;text-align:center;" placeholder="0" required>
+                            </td>
                             <!-- <td style="text-align:center;"><?php echo $satuan;?></td>
                             <td style="text-align:right;"><?php echo 'Rp '.number_format($harjul);?></td>
-                            <td style="text-align:center;"><?php echo $stok;?></td>
+                            <td style="text-align:center;"><?php echo $stok;?></td> -->
                             <td style="text-align:center;">
                             <form action="<?php echo base_url().'admin/penjualan/add_to_cart'?>" method="post">
-                            <input type="hidden" name="kode_brg" value="<?php echo $id?>">
+                            <!-- <input type="hidden" name="kode_brg" value="<?php echo $id?>">
                             <input type="hidden" name="nabar" value="<?php echo $nm;?>">
                             <input type="hidden" name="satuan" value="<?php echo $satuan;?>">
                             <input type="hidden" name="stok" value="<?php echo $stok;?>">
                             <input type="hidden" name="harjul" value="<?php echo number_format($harjul);?>">
-                            <input type="hidden" name="diskon" value="0"> -->
-                            <input type="hidden" name="qty" value="1" required>
+                            <input type="hidden" name="diskon" value="0">
+                            <input type="hidden" name="qty" value="1" required> -->
                                 <button type="submit" class="btn btn-xs btn-info" title="Pilih"><span class="fa fa-edit"></span> Pilih</button>
                             </form>
                             </td>
@@ -222,6 +337,11 @@
     <script src="<?php echo base_url().'assets/js/moment.js'?>"></script>
     <script src="<?php echo base_url().'assets/js/bootstrap-datetimepicker.min.js'?>"></script>
     <script type="text/javascript">
+        function SelectedData()
+        {
+
+        }
+
         $(function(){
             $('#jml_uang').on("input",function(){
                 var total=$('#total').val();

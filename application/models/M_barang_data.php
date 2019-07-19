@@ -1,11 +1,25 @@
 <?php
 class M_barang_data extends CI_Model{
 
-	function barang_list(){
+	    function barang_list(){
         $hasil=$this->db->query("SELECT barang_id,barang_nama,barang_sat1,barang_sat2,barang_sat3,
         FORMAT(barang_harga1,0) as barang_harga1,FORMAT(barang_harga2,0) as barang_harga2,FORMAT(barang_harga3,0) as barang_harga3  
         FROM tbl_barang");
         return $hasil->result();
+        }
+
+        function tampil_barang(){
+            $hasil=$this->db->query("SELECT barang_id,barang_nama,barang_sat1,barang_sat2,barang_sat3,
+            FORMAT(barang_harga1,0) as barang_harga1,FORMAT(barang_harga2,0) as barang_harga2,FORMAT(barang_harga3,0) as barang_harga3  
+            FROM tbl_barang");
+            return $hasil;
+        }
+
+        function tampil_barang_no_format(){
+            $hasil=$this->db->query("SELECT barang_id,barang_nama,barang_sat1,barang_sat2,barang_sat3,
+            barang_harga1,barang_harga2,barang_harga3  
+            FROM tbl_barang");
+            return $hasil;
         }
 
         function simpan_barang($nabar,$barang_sat1,$barang_sat2,$barang_sat3,$barang_harga1,$barang_harga2,$barang_harga3,$barang_cabangtoko,$barang_user_id){
