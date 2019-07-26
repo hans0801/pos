@@ -44,151 +44,57 @@
             </div>
         </div>
         <!-- /.row -->
+        <div class="row">
+        <div class="form-group">
+                        <label class="control-label col-xs-2" >Kode Barang</label>
+                    <div class="col-xs-9">
+                            <input name="kobar" id="kode_barang" class="form-control" type="text" placeholder="Kode Barang" style="width:285px;" disabled="true">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-2" >Nama Barang</label>
+                        <div class="col-xs-9">
+                            <input name="nabar" id="nama_barang" class="form-control" type="text" placeholder="Nama Barang" style="width:285px;" disabled="true" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-2" >Harga & Satuan Barang</label>
+                        <div class="col-xs-9">
+                        <select id="mySelect" name="mySelect" style="width:285px;height:35px"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-2" >Qty Pembelian</label>
+                        <div class="col-xs-9">
+                            <div class="input-group">
+                            <input name="qty_barang" id="qty_barang" class="form-control" type="text" placeholder="0" style="width:50px;" required>
+                            <button type="submit" class="btn btn-success" style="width:235px" onclick="AddData();"> Tambahkan</button>
+                            </div>
+                        </div>
+                    </div>
+        </div>
+
         <!-- Projects Row -->
         <div class="row">
             <div class="col-lg-12">
-            <form action="<?php echo base_url().'admin/penjualan/add_to_cart'?>" method="post">
-            <table>
-                <tr>
-                    <th>Kode Barang</th>
-                </tr>
-                <tr>
-                    <th><input type="text" name="kode_brg" id="kode_brg" class="form-control input-sm"></th>                     
-                </tr>
-                    <div id="detail_barang" style="position:absolute;">
-                    </div>
-            </table>
-             </form>
-             <script type="text/javascript">    
-            
-            function addRow(tableID) {
-
-            var table = document.getElementById(tableID);
-            var rowCount = table.rows.length;
-            var row = table.insertRow(rowCount);
-
-            var cell1 = row.insertCell(0);
-            var element1 = document.createElement("input");
-            element1.type = "checkbox";
-            element1.name="chkbox[]";
-            cell1.appendChild(element1);
-
-            var cell2 = row.insertCell(1);
-            var element3 = document.createElement("input");
-            element3.type = "text";
-            element3.name = "txtbox[]";
-            cell2.appendChild(element3);
-
-
-            var cell3 = row.insertCell(2);
-            var element2 = document.createElement("input");
-            element2.type = "text";
-            element2.name = "txtbox[]";
-            cell3.appendChild(element2);
-
-            }
-
-
-
-            function deleteRow(tableID) {
-             try {
-             var table = document.getElementById(tableID);
-             var rowCount = table.rows.length;
-
-             for(var i=0; i<rowCount; i++) {
-             var row = table.rows[i];
-             var chkbox = row.cells[0].childNodes[0];
-             if(null != chkbox && true == chkbox.checked) {
-             table.deleteRow(i);
-             rowCount--;
-             i--;
-             }
-
-
-             }
-              }catch(e) {
-              alert(e);
-             }
-            }
-
-            </script>
-
-            <input onclick="addRow('dataTable')" type="button" value="Tambah" />
-
-            <input onclick="deleteRow('dataTable')" type="button" value="Hapus" />
-
-            <div style="padding: 20px 0px 0px 0px;">
-            <table id="dataTable" style="border-bottom: 1px solid #F00; border-left: 1px solid #F00; border-right: 1px solid #F00; border-top: 1px solid #F00; width: 350pxpx;">
-            <tr>
-            <td><input name="chk" type="checkbox" /></td>
-           <td> <input type="text" /> </td>
-        <td> <input type="text" /> </td>
-            </tr>
-        </table>
-</div>
-
-            <!-- <table class="table table-bordered table-condensed" style="font-size:11px;margin-top:10px;" id="TabOrder">
+            <table class="table table-bordered table-condensed" style="font-size:12px;margin-top:10px;" id="TabOrder">
                 <thead>
                     <tr>
-                        <th>No</th>
-                        <th>Kode Barang</th>
-                        <th>Nama Barang</th>
-                        <th style="text-align:center;">Satuan</th>
-                        <th style="text-align:center;">Harga(Rp)</th>
-                        <th style="text-align:center;">Diskon(Rp)</th>
+                        <th style="text-align:center;width:130px">Kode Barang</th>
+                        <th style="text-align:center;width:300px">Nama Barang</th>
+                        <th style="text-align:center;width:200px">Harga Jual (Rp) / Satuan</th>
                         <th style="text-align:center;">Qty</th>
+                        <th style="text-align:center;">Diskon(Rp)</th>
                         <th style="text-align:center;">Sub Total</th>
                         <th style="width:100px;text-align:center;">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                     <td>
-                     <input type="text" name="TxtNo" class="form-control" />
-                     </td>
-                     <td>
-                     <input type="text" name="TxtBarangId" class="form-control" />
-                     </td>
-                     <td>
-                     <input type="text" name="TxtBarangNama" class="form-control" />
-                     </td>
-                     <td>
-                     <input type="text" name="TxtSatuan" class="form-control" />
-                     </td>
-                     <td>
-                     <input type="text" name="TxtHarga" class="form-control" />
-                     </td>
-                     <td>
-                     <input type="text" name="TxtDiskon" class="form-control" />
-                     </td>
-                     <td>
-                     <input type="text" name="TxtQty" class="form-control" />
-                     </td>
-                     <td>
-                     <input type="text" name="TxtSubTotal" class="form-control" />
-                     </td>
-                     <button class="btn" data-dismiss="modal" aria-hidden="true">Hapus</button>
                     </tr>
-
-                    <!-- <?php $i = 1; ?>
-                    <?php foreach ($this->cart->contents() as $items): ?>
-                    <?php echo form_hidden($i.'[rowid]', $items['rowid']); ?>
-                    <tr>
-                         <td><?=$items['id'];?></td>
-                         <td><?=$items['name'];?></td>
-                         <td style="text-align:center;"><?=$items['satuan'];?></td>
-                         <td style="text-align:right;"><?php echo number_format($items['amount']);?></td>
-                         <td style="text-align:right;"><?php echo number_format($items['disc']);?></td>
-                         <td style="text-align:center;"><?php echo number_format($items['qty']);?></td>
-                         <td style="text-align:right;"><?php echo number_format($items['subtotal']);?></td>
-                        
-                         <td style="text-align:center;"><a href="<?php echo base_url().'admin/penjualan/remove/'.$items['rowid'];?>" class="btn btn-warning btn-xs"><span class="fa fa-close"></span> Batal</a></td>
-                    </tr>
-                    
-                    <?php $i++; ?>
-                    <?php endforeach; ?> -->
                 </tbody>
-            </table> -->
+        </table>
+</div>
             <form action="<?php echo base_url().'admin/penjualan/simpan_penjualan'?>" method="post">
             <table>
                 <tr>
@@ -219,96 +125,53 @@
             <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3 class="modal-title" id="myModalLabel">Data Barang</h3>
+                <h4 class="modal-title" id="myModalLabel">Data Barang</h4>
             </div>
-                <div class="modal-body" style="overflow:scroll;height:500px;">
-
-                  <table class="table table-bordered table-condensed" style="font-size:11px;" id="mydata">
-                    <thead>
-                        <tr>
-                            <th style="text-align:center;width:40px;">No</th>
-                            <!-- <th style="width:120px;">Kode Barang</th> -->
-                            <th style="width:240px;">Nama Barang</th>
-                            <th style="width:120px;">Harga Jual Barang / Satuan </th>
-                            <th style="width:60px;">Qty </th>
-                            <!-- <th>Satuan</th>
-                            <th style="width:100px;">Harga (Eceran)</th>
-                            <th>Stok</th> -->
-                            <th style="width:100px;text-align:center;">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php 
-                        $no=0;
-                        foreach ($data->result_array() as $a):
-                            $no++;
-                            // $id=$a['barang_id'];
-                            $nm=$a['barang_nama'];
-                            $sat1=$a['barang_sat1'];
-                            $sat2=$a['barang_sat2'];
-                            $sat3=$a['barang_sat3'];
-                            $har1=$a['barang_harga1'];
-                            $har2=$a['barang_harga2'];
-                            $har3=$a['barang_harga3'];
-                            // $satuan=$a['barang_satuan'];
-                            // $harpok=$a['barang_harpok'];
-                            // $harjul=$a['barang_harjul'];
-                            // $harjul_grosir=$a['barang_harjul_grosir'];
-                            // $stok=$a['barang_stok'];
-                            // $min_stok=$a['barang_min_stok'];
-                            // $kat_id=$a['barang_kategori_id'];
-                            // $kat_nama=$a['kategori_nama'];
-                    ?>
-                        <tr>
-                            <td style="text-align:center;"><?php echo $no;?></td>
-                            <!-- <td><?php echo $id;?></td> -->
-                            <td><?php echo $nm;?></td>
-                            <td>
-                            <select name="HarSat" id="HarSat" class="form-control">
-                                <option value="0">-PILIH-</option>
-                                <option value="<?php echo number_format($har1);?>"><?php echo 'Rp' .number_format($har1); echo '/'; echo $sat1;?></option>
-                                <option value="<?php echo number_format($har2);?>"><?php echo 'Rp' .number_format($har2); echo '/'; echo $sat2;?></option>
-                                <option value="<?php echo number_format($har3);?>"><?php echo 'Rp' .number_format($har3); echo '/'; echo $sat3;?></option>
-                            </select>
-                            </td>
-                            <td><input name="TxtQty" id="TxtQty" class="form-control" type="text" style="width:60px;text-align:center;" placeholder="0" required>
-                            </td>
-                            <!-- <td style="text-align:center;"><?php echo $satuan;?></td>
-                            <td style="text-align:right;"><?php echo 'Rp '.number_format($harjul);?></td>
-                            <td style="text-align:center;"><?php echo $stok;?></td> -->
-                            <td style="text-align:center;">
-                            <form action="<?php echo base_url().'admin/penjualan/add_to_cart'?>" method="post">
-                            <!-- <input type="hidden" name="kode_brg" value="<?php echo $id?>">
-                            <input type="hidden" name="nabar" value="<?php echo $nm;?>">
-                            <input type="hidden" name="satuan" value="<?php echo $satuan;?>">
-                            <input type="hidden" name="stok" value="<?php echo $stok;?>">
-                            <input type="hidden" name="harjul" value="<?php echo number_format($harjul);?>">
-                            <input type="hidden" name="diskon" value="0">
-                            <input type="hidden" name="qty" value="1" required> -->
-                                <button type="submit" class="btn btn-xs btn-info" title="Pilih"><span class="fa fa-edit"></span> Pilih</button>
-                            </form>
-                            </td>
-                        </tr>
-                    <?php endforeach;?>
-                    </tbody>
-                </table>          
-
+                <div class="modal-body" style="height:690px;">
+                <table class="table table-bordered table-condensed" style="font-size:12px;height:300px;" id="mydata">
+                <thead>
+                    <tr>
+                        <th style="text-align:center;width:40px;">Kode Barang</th>
+                        <th>Nama Barang</th>
+                        <th>Harga Jual & Satuan</th>
+                        <th style="width:120px;text-align:center;">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php 
+                    foreach ($data->result_array() as $a):
+                        $id=$a['barang_id'];
+                        $nm=$a['barang_nama'];
+                        $satbarang1=$a['barang_sat1'];
+                        $satbarang2=$a['barang_sat2'];
+                        $satbarang3=$a['barang_sat3'];
+                        $harga1=$a['barang_harga1'];
+                        $harga2=$a['barang_harga2'];
+                        $harga3=$a['barang_harga3'];
+                ?>
+                    <tr>
+                        <td><?php echo $id;?></td>
+                        <td><?php echo $nm;?></td>
+                        <td><i class="glyphicon glyphicon-check"><?php echo $harga1; echo "/";echo $satbarang1;?>
+                            <br>
+                            <i class="glyphicon glyphicon-check"><?php echo $harga2; echo "/";echo $satbarang2;?>
+                            <br>
+                            <i class="glyphicon glyphicon-check"><?php echo $harga3; echo "/";echo $satbarang3;?>
+                        </td>
+                        <td style="text-align:center;">
+                            <button id="button1" class="btn btn-xs btn-success item_select" style="height:35px;width:70px;" data="<?php echo $id;?>"> Pilih</button>
+                        </td>
+                    </tr>
+                <?php endforeach;?>
+                </tbody>
+            </table>
                 </div>
-
                 <div class="modal-footer">
-                    <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
-                    
                 </div>
             </div>
             </div>
         </div>
-
-        
-
-        <!-- ============ MODAL HAPUS =============== -->
-        
-
-        <!--END MODAL-->
+        <!-- ============ END MODAL ADD =============== -->
 
         <hr>
 
@@ -337,10 +200,60 @@
     <script src="<?php echo base_url().'assets/js/moment.js'?>"></script>
     <script src="<?php echo base_url().'assets/js/bootstrap-datetimepicker.min.js'?>"></script>
     <script type="text/javascript">
-        function SelectedData()
-        {
+        function AddData(){
+            var IdBarang = $("#kode_barang").val();
+            var NmBarang = $("#nama_barang").val();
+            var listsatuan=document.getElementById('mySelect');
+            var result = listsatuan.options[listsatuan.selectedIndex].text;
+            var HargaJual = $("#MySelect").val();
+            var QtyOrder = $("#qty_barang").val();
+            var RowTable = "<tr><td style='text-align:center'>" + IdBarang + "</td><td style='text-align:center'>" + NmBarang + "</td><td style='text-align:center'>" + result + "</td><td style='text-align:center'>" + QtyOrder + "</td><td style='text-align:center'><input type='text' style='width:150px' value='0'></input></td><td style='text-align:center'>0</td><td style='text-align:center'><button type='submit' class='btn btn-danger' onclick='RemoveData(this)'>Hapus</button></td></tr>";
+            $("#TabOrder").append(RowTable);
+            ClearForm();
+        };
 
+        function clearSelectList(list) {
+        // when length is 0, the evaluation will return false.
+        while (list.options.length) {
+        // continue to remove the first option until no options remain.
+        list.remove(0);
         }
+         };
+
+        function ClearForm(){
+            var listsatuan=document.getElementById('mySelect');
+            $("#kode_barang").val("");
+            $("#nama_barang").val("");
+            clearSelectList(listsatuan);
+            $("#qty_barang").val("0");
+        };
+
+        function RemoveData(ctl){
+            $(ctl).parents("tr").remove();
+        };
+
+        $('#mydata').on('click','.item_select',function(){
+            var id=$(this).attr('data');
+            $.ajax({
+                type : "GET",
+                url   : "<?php echo site_url('admin/barang_data/get_barang')?>",
+                dataType : "json",
+                data : {id:id},
+                success: function(data){
+                    $.each(data,function(barang_id, barang_nama, barang_sat1, barang_sat2, barang_sat3,barang_harga1,barang_harga2,barang_harga3){
+                        $('[id="kode_barang"]').val(data.barang_id);
+                        $('[id="nama_barang"]').val(data.barang_nama);
+                        var listsatuan=document.getElementById('mySelect');
+                        listsatuan.options[0]=new Option(data.barang_harga1 + '/' + data.barang_sat1,data.barang_harga1);
+                        listsatuan.options[1]=new Option(data.barang_harga2 + '/' + data.barang_sat2,data.barang_harga2);
+                        listsatuan.options[2]=new Option(data.barang_harga3 + '/' + data.barang_sat3,data.barang_harga3);
+                        // PriceFormatForEdit();
+                        $('#largeModal').modal('hide');
+                    }); 
+                }
+            });
+            return false;
+        });
 
         $(function(){
             $('#jml_uang').on("input",function(){
@@ -354,11 +267,10 @@
         });
     </script>
     <script type="text/javascript">
-        $(document).ready(function() {
+            $(document).ready(function() {
             $('#mydata').DataTable();
-        } );
-    </script>
-    <script type="text/javascript">
+        });
+
         $(function(){
             $('.jml_uang').priceFormat({
                     prefix: '',
@@ -387,30 +299,12 @@
         });
     </script>
     <script type="text/javascript">
-        $(document).ready(function(){
-            //Ajax kabupaten/kota insert
-            $("#kode_brg").focus();
-            $("#kode_brg").on("input",function(){
-                var kobar = {kode_brg:$(this).val()};
-                   $.ajax({
-               type: "POST",
-               url : "<?php echo base_url().'admin/penjualan/get_barang';?>",
-               data: kobar,
-               success: function(msg){
-               $('#detail_barang').html(msg);
-               }
-            });
-            }); 
-
-            $("#kode_brg").keypress(function(e){
+            $("#kode_barang").keypress(function(e){
                 if(e.which==13){
                     $("#jumlah").focus();
                 }
             });
-        });
-    </script>
-    
-    
+    </script>  
 </body>
 
 </html>
