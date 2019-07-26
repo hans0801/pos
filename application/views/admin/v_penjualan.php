@@ -68,8 +68,14 @@
                         <div class="col-xs-9">
                             <div class="input-group">
                             <input name="qty_barang" id="qty_barang" class="form-control" type="text" placeholder="0" style="width:50px;" required>
-                            <button type="submit" class="btn btn-success" style="width:235px" onclick="AddData();"> Tambahkan</button>
+                            <button type="submit" class="btn btn-success" style="width:235px" onclick="AddData();"> Tambahkan ke List</button>
                             </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-2" >Diskon Barang</label>
+                        <div class="col-xs-9">
+                            <input name="diskon" id="diskon_barang" class="form-control" type="text" placeholder="0" style="width:285px;">
                         </div>
                     </div>
         </div>
@@ -77,14 +83,14 @@
         <!-- Projects Row -->
         <div class="row">
             <div class="col-lg-12">
-            <table class="table table-bordered table-condensed" style="font-size:12px;margin-top:10px;" id="TabOrder">
+            <table class="table table-bordered table-condensed" style="font-size:13px;margin-top:10px;" id="TabOrder">
                 <thead>
                     <tr>
                         <th style="text-align:center;width:130px">Kode Barang</th>
                         <th style="text-align:center;width:300px">Nama Barang</th>
                         <th style="text-align:center;width:200px">Harga Jual (Rp) / Satuan</th>
                         <th style="text-align:center;">Qty</th>
-                        <th style="text-align:center;">Diskon(Rp)</th>
+                        <th style="text-align:center;width:150px;">Diskon(Rp)</th>
                         <th style="text-align:center;">Sub Total</th>
                         <th style="width:100px;text-align:center;">Aksi</th>
                     </tr>
@@ -100,7 +106,7 @@
                 <tr>
                     <td style="width:760px;" rowspan="2"><button type="submit" class="btn btn-info btn-lg"> Simpan</button></td>
                     <th style="width:140px;">Total Belanja(Rp)</th>
-                    <th style="text-align:right;width:140px;"><input type="text" name="total2" value="<?php echo number_format($this->cart->total());?>" class="form-control input-sm" style="text-align:right;margin-bottom:5px;" readonly></th>
+                    <th style="text-align:right;width:140px;"><input type="text" name="total2" id="total2" class="form-control total2" style="text-align:right;margin-bottom:5px;" readonly></th>
                     <input type="hidden" id="total" name="total" value="<?php echo $this->cart->total();?>" class="form-control input-sm" style="text-align:right;margin-bottom:5px;" readonly>
                 </tr>
                 <tr>
@@ -200,16 +206,40 @@
     <script src="<?php echo base_url().'assets/js/moment.js'?>"></script>
     <script src="<?php echo base_url().'assets/js/bootstrap-datetimepicker.min.js'?>"></script>
     <script type="text/javascript">
+
+        function total(){
+                var Total= 0;
+                $('#TabOrder > tbody  > tr').each(function() {
+                    var SubTotal = $(this).find('.SubTotal').val();
+                    Total = (Total + SubTotal)
+                    //$(this).find('.amount').text(''+amount);
+                });
+                $('.total2').text(Total);
+        }
+
         function AddData(){
             var IdBarang = $("#kode_barang").val();
+            var QtyOrder = $("#qty_barang").val();
+            if(IdBarang=='' || QtyOrder=='0' || QtyOrder=='')
+            {
+            alert("Silahkan Pilih Data Barang Terlebih Dahulu Atau Qty Barang Tidak Boleh 0.");
+            }
+            else
+            {
             var NmBarang = $("#nama_barang").val();
             var listsatuan=document.getElementById('mySelect');
             var result = listsatuan.options[listsatuan.selectedIndex].text;
-            var HargaJual = $("#MySelect").val();
-            var QtyOrder = $("#qty_barang").val();
-            var RowTable = "<tr><td style='text-align:center'>" + IdBarang + "</td><td style='text-align:center'>" + NmBarang + "</td><td style='text-align:center'>" + result + "</td><td style='text-align:center'>" + QtyOrder + "</td><td style='text-align:center'><input type='text' style='width:150px' value='0'></input></td><td style='text-align:center'>0</td><td style='text-align:center'><button type='submit' class='btn btn-danger' onclick='RemoveData(this)'>Hapus</button></td></tr>";
+            var HargaJual = listsatuan.options[listsatuan.selectedIndex].value;
+            var DiskonBarang = $("#diskon_barang").val();
+            if(DiskonBarang==''){
+                DiskonBarang='0';
+            }
+            var SubTotal = Number(QtyOrder) * Number(HargaJual) - Number(DiskonBarang);
+            var RowTable = "<tr><td style='text-align:center'>" + IdBarang + "</td><td style='text-align:center'>" + NmBarang + "</td><td style='text-align:center'>" + result + "</td><td style='text-align:center'>" + QtyOrder + "</td><td style='text-align:center'>"+ DiskonBarang +"</td><td style='text-align:center' class='SubTotal'>" + SubTotal + "</td><td style='text-align:center'><button type='submit' class='btn btn-danger' onclick='RemoveData(this)'>Hapus</button></td></tr>";
             $("#TabOrder").append(RowTable);
+            total();
             ClearForm();
+            }
         };
 
         function clearSelectList(list) {
@@ -230,6 +260,7 @@
 
         function RemoveData(ctl){
             $(ctl).parents("tr").remove();
+            CountTotal();
         };
 
         $('#mydata').on('click','.item_select',function(){
