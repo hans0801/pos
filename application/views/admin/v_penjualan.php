@@ -45,7 +45,19 @@
         </div>
         <!-- /.row -->
         <div class="row">
-        <div class="form-group">
+                     <div class="form-group">
+                        <label class="control-label col-xs-2" >No Faktur</label>
+                    <div class="col-xs-9">
+                            <input name="kobar" id="kode_barang" class="form-control" type="text" value="<?php echo $nofak ?>" style="width:285px;" disabled="true">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-2" >Tgl Faktur</label>
+                    <div class="col-xs-9">
+                            <input name="kobar" id="kode_barang" class="form-control" type="text" value="<?php echo date('d-m-Y') ?>" style="width:285px;" disabled="true">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="control-label col-xs-2" >Kode Barang</label>
                     <div class="col-xs-9">
                             <input name="kobar" id="kode_barang" class="form-control" type="text" placeholder="Kode Barang" style="width:285px;" disabled="true">
@@ -101,7 +113,7 @@
                 </tbody>
         </table>
 </div>
-            <form action="<?php echo base_url().'admin/penjualan/simpan_penjualan'?>" method="post">
+            <!-- <form action="<?php echo base_url().'admin/penjualan/simpan_penjualan'?>" method="post"> -->
             <table>
                 <tr>
                     <td style="width:760px;" rowspan="2"><button type="submit" class="btn btn-info btn-lg"> Simpan</button></td>
@@ -121,7 +133,7 @@
                 </tr>
 
             </table>
-            </form>
+            <!-- </form> -->
             <hr/>
         </div>
         <!-- /.row -->
@@ -208,13 +220,16 @@
     <script type="text/javascript">
 
         function total(){
-                var Total= 0;
-                $('#TabOrder > tbody  > tr').each(function() {
-                    var SubTotal = $(this).find('.SubTotal').val();
-                    Total = (Total + SubTotal)
-                    //$(this).find('.amount').text(''+amount);
-                });
-                $('.total2').text(Total);
+               
+    var Total = 0;
+    $('#TabOrder tbody tr').each(function(){
+    if($(this).find('td:nth-child(6) input').val() > 0)
+    {
+    var SubTotal = $(this).find('td:nth-child(6) input').val();
+    Total = parseInt(Total) + parseInt(SubTotal);
+    }
+    });
+    $('#total2').val(Total);
         }
 
         function AddData(){
@@ -226,19 +241,27 @@
             }
             else
             {
-            var NmBarang = $("#nama_barang").val();
-            var listsatuan=document.getElementById('mySelect');
-            var result = listsatuan.options[listsatuan.selectedIndex].text;
-            var HargaJual = listsatuan.options[listsatuan.selectedIndex].value;
-            var DiskonBarang = $("#diskon_barang").val();
-            if(DiskonBarang==''){
-                DiskonBarang='0';
-            }
-            var SubTotal = Number(QtyOrder) * Number(HargaJual) - Number(DiskonBarang);
-            var RowTable = "<tr><td style='text-align:center'>" + IdBarang + "</td><td style='text-align:center'>" + NmBarang + "</td><td style='text-align:center'>" + result + "</td><td style='text-align:center'>" + QtyOrder + "</td><td style='text-align:center'>"+ DiskonBarang +"</td><td style='text-align:center' class='SubTotal'>" + SubTotal + "</td><td style='text-align:center'><button type='submit' class='btn btn-danger' onclick='RemoveData(this)'>Hapus</button></td></tr>";
-            $("#TabOrder").append(RowTable);
-            total();
-            ClearForm();
+                if(ItemIsExistOnChart())
+                {
+                    alert("Mohon maaf, barang sudah ada pada list. Silahkan pilih barang yang lainnya.")
+                }
+                else
+                {
+                    var NmBarang = $("#nama_barang").val();
+                    var listsatuan=document.getElementById('mySelect');
+                     var result = listsatuan.options[listsatuan.selectedIndex].text;
+                     var HargaJual = listsatuan.options[listsatuan.selectedIndex].value;
+                     var DiskonBarang = $("#diskon_barang").val();
+                     if(DiskonBarang==''){
+                        DiskonBarang='0';
+                    }  
+                    var SubTotal = Number(QtyOrder) * Number(HargaJual) - Number(DiskonBarang);
+                    var RowTable = "<tr><td style='text-align:center'><input type='text' style='border:0px' value='" + IdBarang + "' readonly/></td><td style='text-align:center'>" + NmBarang + "</td><td style='text-align:center'>" + result + "</td><td style='text-align:center'>" + QtyOrder + "</td><td style='text-align:center'>"+ DiskonBarang +"</td><td style='text-align:center' class='SubTotal'><input type='text' style='border:0px' value='" + SubTotal + "' readonly/></td><td style='text-align:center'><button type='submit' class='btn btn-danger' onclick='RemoveData(this)'>Hapus</button></td></tr>";
+                    $("#TabOrder").append(RowTable);
+                    total();
+                    ClearForm();
+                }
+            
             }
         };
 
@@ -248,7 +271,30 @@
         // continue to remove the first option until no options remain.
         list.remove(0);
         }
-         };
+        };
+
+        function ItemIsExistOnChart(){
+        var IsExist=false;
+        var ValIdBarang=0;
+        var IdBarang = $("#kode_barang").val();
+
+        $('#TabOrder tbody tr').each(function(){
+        if($(this).find('td:nth-child(1) input').val() > 0)
+         {
+            ValIdBarang= $(this).find('td:nth-child(1) input').val();
+         }
+         });
+         
+         if(IdBarang==ValIdBarang)
+         {
+            IsExist=true;
+         }
+         else
+         {
+            IsExist=false;
+         }
+        return IsExist;
+        }
 
         function ClearForm(){
             var listsatuan=document.getElementById('mySelect');
@@ -260,7 +306,7 @@
 
         function RemoveData(ctl){
             $(ctl).parents("tr").remove();
-            CountTotal();
+            total();
         };
 
         $('#mydata').on('click','.item_select',function(){

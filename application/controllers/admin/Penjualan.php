@@ -14,6 +14,7 @@ class Penjualan extends CI_Controller{
 	function index(){
 	if($this->session->userdata('akses')=='1' || $this->session->userdata('akses')=='2'){
 		$data['data']=$this->m_barang_data->tampil_barang_no_format();
+		$data['nofak']=$this->m_penjualan->get_nofak();
 		$this->load->view('admin/v_penjualan',$data);
 	}else{
 		$url=base_url('administrator');
