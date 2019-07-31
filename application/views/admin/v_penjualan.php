@@ -219,17 +219,40 @@
     <script src="<?php echo base_url().'assets/js/bootstrap-datetimepicker.min.js'?>"></script>
     <script type="text/javascript">
 
-        function total(){
-               
-    var Total = 0;
-    $('#TabOrder tbody tr').each(function(){
-    if($(this).find('td:nth-child(6) input').val() > 0)
-    {
-    var SubTotal = $(this).find('td:nth-child(6) input').val();
-    Total = parseInt(Total) + parseInt(SubTotal);
-    }
-    });
-    $('#total2').val(Total);
+        function SaveData(){
+            
+        }
+
+        function SaveDetailData(){
+        var lastRowId = $('#TabOrder tr:last').attr("id"); //finds id of the last row inside table
+        var name = new Array();  
+        var age = new Array();   
+        for ( var i = 1; i <= lastRowId; i++) {
+            name.push($("#"+i+" .name"+i).html());  //pushing all the names listed in the table
+            age.push($("#"+i+" .age"+i).html());   //pushing all the ages listed in the table
+        }
+        var sendName = JSON.stringify(name);  
+        var sendAge = JSON.stringify(age);
+        $.ajax({
+            url: "save.php",
+            type: "post",
+            data: {name : sendName , age : sendAge},
+            success : function(data){
+                alert(data);    // alerts the response from php.
+                }
+        });
+        };
+
+        function total(){       
+        var Total = 0;
+        $('#TabOrder tbody tr').each(function(){
+        if($(this).find('td:nth-child(6) input').val() > 0)
+        {
+        var SubTotal = $(this).find('td:nth-child(6) input').val();
+        Total = parseInt(Total) + parseInt(SubTotal);
+        }
+        });
+        $('#total2').val(Total);
         }
 
         function AddData(){

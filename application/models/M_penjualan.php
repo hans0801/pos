@@ -1,6 +1,15 @@
 <?php
 class M_penjualan extends CI_Model{
 
+	function simpan_data_penjualan($nabar,$barang_sat1,$barang_sat2,$barang_sat3,$barang_harga1,$barang_harga2,$barang_harga3,$barang_cabangtoko,$barang_user_id){
+		$hasil=$this->db->query("INSERT INTO tbl_barang (barang_nama,barang_sat1,barang_sat2,barang_sat3,barang_harga1,barang_harga2,barang_harga3,barang_cabangtoko,barang_user_id)
+		VALUES('$nabar','$barang_sat1','$barang_sat2','$barang_sat3','$barang_harga1','$barang_harga2','$barang_harga3','$barang_cabangtoko','$barang_user_id')");
+		return $hasil;
+	}
+	
+
+
+
 	function hapus_retur($kode){
 		$hsl=$this->db->query("DELETE FROM tbl_retur WHERE retur_id='$kode'");
 		return $hsl;
