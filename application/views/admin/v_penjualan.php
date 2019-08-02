@@ -116,7 +116,7 @@
             <!-- <form action="<?php echo base_url().'admin/penjualan/simpan_penjualan'?>" method="post"> -->
             <table>
                 <tr>
-                    <td style="width:760px;" rowspan="2"><button type="submit" class="btn btn-info btn-lg"> Simpan</button></td>
+                    <td style="width:760px;" rowspan="2"><button type="submit" class="btn btn-info btn-lg" onclick="SaveData();"> Simpan</button></td>
                     <th style="width:140px;">Total Belanja(Rp)</th>
                     <th style="text-align:right;width:140px;"><input type="text" name="total2" id="total2" class="form-control total2" style="text-align:right;margin-bottom:5px;" readonly></th>
                     <input type="hidden" id="total" name="total" value="<?php echo $this->cart->total();?>" class="form-control input-sm" style="text-align:right;margin-bottom:5px;" readonly>
@@ -220,7 +220,20 @@
     <script type="text/javascript">
 
         function SaveData(){
-            
+         var TableData = new Array();
+    
+         $('#TabOrder tr').each(function(row, tr){
+        TableData[row]={
+            "KodeBarang" : $(tr).find('td:eq(0)').text()
+            , "NamBarang" :$(tr).find('td:eq(1)').text()
+            , "HarSat" : $(tr).find('td:eq(2)').text()
+            , "Qty" : $(tr).find('td:eq(3)').text()
+            , "Diskon" : $(tr).find('td:eq(4)').text()
+            , "SubTotal" : $(tr).find('td:eq(5)').text()
+          }
+         }); 
+        TableData.shift();  // first row is the table header - so remove
+        alert('KoBar:' + TableData.KodeBarang);
         }
 
         function SaveDetailData(){
